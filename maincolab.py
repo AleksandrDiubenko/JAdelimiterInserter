@@ -31,8 +31,8 @@ mode = input("Enter 1 or 2 (default: 1): ").strip() or "1"
 # --- Main regex ---
 pattern = re.compile(r"""
 (
-    (\p{Han}{1,2}|\p{Katakana}{2,12}|こと|ところ|\p{Han}(?:\p{Hiragana}(?!で))+\p{Han}|\p{Katakana}{2,12}\p{Han}|もの|入り|」|たち|ここ|そこ|\p{Han}ら|(?P<double>\p{Hiragana}{2})(?P=double)|[えけげせぜてでねめれ]る|まま|[あこそ]いつ|あ[なん]た|さん|まみれ|おそらく|たっぷり|気持ち|すら|さすが|くず|あちこち|もと|さま|[こそあど]れ|ど[れん]だけ|みんな|やつ|すで|だ|[こそあ]ちら|[こそあ]っち|みたい|どこ)
-    (が(?!(して|った|ら))|か(?!([はもらなえがけげせぜてでねめれいきぎしちにんをうくぐすつぬむるりっ]|った|さ))|か[は]|は(?!ず)|も(?!の)|の(?![みにがはた為よ])|なく(?!て)|な(?![くのんらるいし])|する(?!な)|から(?!して)|まで|に(?!([はも]|ついて|関して|すら))|
+    (\p{Han}{1,2}|\p{Katakana}{2,12}|こと|ところ|\p{Han}(?:\p{Hiragana}(?!で))+\p{Han}|\p{Katakana}{2,12}\p{Han}|もの|入り|」|たち|ここ|そこ|\p{Han}ら|(?P<double>\p{Hiragana}{2})(?P=double)|[えけげせぜてでねめれ]る|まま|[あこそ]いつ|あ[なん]た|さん|まみれ|おそらく|たっぷり|気持ち|すら|さすが|くず|あちこち|もと|さま|[こそあど]れ|ど[れん]だけ|みんな|やつ|すで|だ|[こそあ]ちら|[こそあ]っち|みたい|どこ|[0-9０-９][%％年月日個本人枚匹頭羽冊台隻つ]?|かり)
+    (が(?!(して|った|ら|かり))|か(?!([はもらなえがけげせぜてでねめれいきぎしちにんをうくぐすつぬむるりっ]|った|さ))|か[は]|は(?!ず)|も(?!の)|の(?![みにがはた為よ])|なく(?!て)|な(?![くのんらるいし])|する(?!な)|から(?!して)|まで|に(?!([はも]|ついて|よって|よる|関して|すら))|
     に[はも]|へ[の]|へ(?![の])|で(?![はもすしきの])|で[はも]|じて(?!る)|や(?![からりるれ])|と[のはか]|と(?!([のなはかす]|[い言云]う))|して[はも]|して(?![はもる])|ならば|なら(?![ばで]))
     |
     [、。？！・：；]
@@ -43,12 +43,12 @@ pattern = re.compile(r"""
     |
     について(?![はも])|について[はも]|に関して(?![はも])|に関して[はも]|[っいきぎしちにん][ただ]り|とにかく|でも|[くぐ]らい(?!は)|[くぐ]らいは|まるで|って(?![るたかも])|っても|
     すなわち|[うくぐすつぬふむる]の[にはもが]|を|んな[のに]|[って]たら|として(?!も)|つまり|ちょっと|ちょうど|々な|々に(?![もは])|々に[もは]|たい(?=\p{Han})|けど|よう[なに](?=(\p{Han}{2}|\p{Katakana}{2}))|
-    [ただ]と(?!は)|[ただ]とは|とは|[のただ]ほうが|ないほうが|[のただ]方が|ない方が|風に|[いきしちにひみり]たくて|[うくすつぬふむる]まて|[^一-龯]続く|ないと(?=いけ)|く(?=(\p{Han}|\p{Katakana}{2}))|
-    ほとんど|らしくて(?!は)|らしく(?!て)|ため([にの](?![はも])|ならば|なら(?!ば))|ため[にの][はも]|為に(?![はも])|為に[はも]|わけ(では|じゃ(?!あ))|ほうが(?=(\p{Han}|\p{Katakana}{2}))|
+    [ただ]と(?!(は|えば))|[ただ]とは|とは|[のただ]ほうが|ないほうが|[のただ]方が|ない方が|風に|[いきしちにひみり]たくて|[うくすつぬふむる]まて|[^一-龯]続く|ないと(?=いけ)|く(?=(\p{Han}|\p{Katakana}{2}))|
+    ほとんど|らしくて(?!は)|らしく(?!て)|ため([にの](?![はも])|ならば|なら(?!ば))|ため[にの][はも]|為に(?![はも])|為に[はも]|わけ(には|では|じゃ(?!あ))|ほうが(?=(\p{Han}|\p{Katakana}{2}))|
     いきなり|すれば|(れば|ないと)(?=([い良善好]い|[よ良善好]か))|て(?=い?ました)|しっかり|して(?=あげ([るた]|(ます|まし)))|て(?=(ください|下さい|ちょうだい))|これまでに(?!は)|
     より(?=ずっと)|はじめて|[てで](?=くれ)|くなって(?!は)|され[るた](?![んの])|かった(?![んのりわっがぞぜ])|もなくて(?!は)|あらゆる|すべて(の|を|では|じゃ(?!あ))|すぐに[はも]|すぐに(?![はも])|
     もなく(?!て)|ながら|がてら|った(?![らんのりわっがぞぜ])|よりも|かも(?=[しれ])|とともに(?![はも])|と共に(?![はも])|もっとも|すべて(?!でのを)|ただの|まま(?=(\p{Han}|\p{Katakana}{2}))|
-    どうして|どうやって|した(?=(\p{Han}{2}|こと|とこ))|のもとに|[うくすつぬふむるじの]よう[にな]|れて(?=(いき?ま|いる|いた|いな))|じゃ(?=な[いか])|では(?=な[いか])|またしても|
+    どうして|どうやって|した(?=(\p{Han}{2}|こと|とこ))|のもとに|[うくすつぬふむるじのい]よう[にな]|れて(?=(いき?ま|いる|いた|いな))|じゃ(?=な[いか])|では(?=な[いか])|またしても|
     どうなるか(?!は)|どうなるかは|しばらく|[えけげせぜてでねめれ]なく(?!て)|[えけげせぜてでねめれあかさたなまら]ずに|[えけげせぜてでねめれいきしじちにみりっ]て(?=い(る|ま|く|け))|
     \p{Han}し?い(?=(\p{Han}|\p{Katakana}{2}))(?!出)|\p{Han}しく(?=(\p{Han}|\p{Katakana}{2}))|べきじゃ(?!あ)|かなり(?=(\p{Han}|\p{Katakana}{2}))|[えけげせぜてでねめれ]ば(?=(\p{Han}|\p{Katakana}{2}))|
     ゆっくり(?=(\p{Han}|\p{Katakana}{2}))|ちゃんと(?=(\p{Han}|\p{Katakana}{2}))|(なければ|なきゃ|ないと)(?=(なら|いけ))|\p{Hiragana}(?=(はず|べき)(だ|よ|$|。|…|！|？))|\p{Hiragana}(?=\p{Katakana}{2})|て(?=ありがと)|
@@ -56,7 +56,7 @@ pattern = re.compile(r"""
     \p{Han}たる(?=(\p{Han}|\p{Katakana}{2}))|という(?=(\p{Han}|\p{Katakana}{2}))|を|な[くい](?=(\p{Han}|\p{Katakana}{2}))|\p{Han}\p{Hiragana}に(?=な(る|った|らな))|いた(?=(\p{Han}|\p{Katakana}{2}))|
     ないと(?=(\p{Han}|\p{Katakana}{2}))|て(?=ほし[いくか])|\p{Han}{2}(?=\p{Katakana}{2})|な(?=(\p{Han}|\p{Katakana}{2}))|\p{Katakana}{2}(?=\p{Han}{2})|(?P<doubler>\p{Hiragana}{2})(?P=doubler)|くて(?=\p{Han})|
     しか(?=(\p{Han}|\p{Katakana}{2}))|よりかは|て(?=しま[ういわ])|とっ?ても|\p{Han}\p{Hiragana}(?=\p{Han}{2})|とか(?=\p{Han})|もう(?=\p{Han})|\p{Hiragana}(?=つもり)|が(?=(\p{Han}{2}|\p{Katakana}{2}))|
-    なんて(?=こった)
+    なんて(?=こった)|による(?=(\p{Han}{2}|\p{Katakana}{2}))
 )
 """, re.VERBOSE)
 
@@ -95,11 +95,11 @@ if mode == "1":
 
     def insert_delimiter(text):
         if not isinstance(text, str): return text
-        
+
         def replacer(m):
             end = m.end()
             remainder = text[end:]
-            
+
             # Safety check for end of string
             if not remainder:
                 return m.group(0)
@@ -109,7 +109,7 @@ if mode == "1":
             # or if the rest of the cell is only punctuation/whitespace.
             if re.match(r'[、。？！,．,.!?"”」』）)]', next_char) or re.match(r'^[、。？！…‥！？\s]*$', remainder):
                 return m.group(0)
-            
+
             return m.group(0) + INSERT_CHAR
 
         processed = pattern.sub(replacer, text)
@@ -117,7 +117,7 @@ if mode == "1":
 
     print("⏳ Processing...")
     processed_count = 0
-    
+
     for ws in wb.worksheets:
         # Create header mapping (Header Name -> Column Index)
         headers = {}
@@ -138,7 +138,7 @@ if mode == "1":
     name, ext = os.path.splitext(filename)
     output_filename = f"delimiters_added_{name}{ext}"
     wb.save(output_filename)
-    
+
     if IS_COLAB:
         files.download(output_filename)
     print(f"✅ Done! Processed {processed_count} cells.")
@@ -159,7 +159,7 @@ elif mode == "2":
 
     # Find all potential breakpoints
     break_positions = [m.end() for m in pattern.finditer(text)]
-    
+
     if not break_positions:
         print("⚠️ No suitable breakpoints found in the text.")
         print(f"Original: {text}")
@@ -172,19 +172,19 @@ elif mode == "2":
         # Select the best breakpoints closest to mathematical division
         for i in range(1, lines):
             target_pos = target_len * i
-            
+
             # Filter valid breaks that are ahead of the last one
             valid_breaks = [b for b in break_positions if b > last]
-            
+
             if not valid_breaks:
                 break # No more breaks available
-            
+
             best_break = min(valid_breaks, key=lambda x: abs(x - target_pos))
             chosen_breaks.append(best_break)
             last = best_break
 
         chosen_breaks = sorted(set(chosen_breaks))
-        
+
         # Construct chunks
         chunks = []
         prev = 0
@@ -197,7 +197,7 @@ elif mode == "2":
         def polish_lines(chunks):
             adjusted = chunks[:]
             punct_start = "、。？！：；…‥" + "..."
-            
+
             # Fix "orphaned" leading punctuation.
             # If a line starts with punctuation, move it to the end of the previous line.
             for i in range(1, len(adjusted)):
