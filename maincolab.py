@@ -83,7 +83,7 @@ if mode == "1":
         filename = input("Enter local filename: ").strip()
         wb = load_workbook(filename)
 
-    target_headers = {"ja", "jp", "jap", "japanese"}
+    target_headers = {"ja", "jp", "jap", "japanese", "日本語", "日语"}
 
     def postprocess_ellipses(text):
         if not isinstance(text, str): return text
